@@ -1,12 +1,17 @@
 import requests
 import json
 import warnings
+import sys
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from urllib3.exceptions import InsecureRequestWarning
 import os
+
+# Fix UnicodeEncodeError on Windows GBK terminals
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei', 'Arial Unicode MS']
 plt.rcParams['axes.unicode_minus'] = False
@@ -103,7 +108,7 @@ if response.status_code == 200:
 
     # 图2：城市分布 Top 8 柱状图
     city_top = df['city'].value_counts().head(8)
-    sns.barplot(x=city_top.values, y=city_top.index, palette='viridis', ax=axes[0, 1])
+    sns.barplot(x=city_top.values, y=city_top.index, hue=city_top.index, palette='viridis', legend=False, ax=axes[0, 1])
     axes[0, 1].set_title('城市岗位分布 Top 8')
     axes[0, 1].set_xlabel('岗位数量')
 
@@ -112,12 +117,12 @@ if response.status_code == 200:
         '类型': ['Python岗位', '其他岗位'],
         '平均薪资': [avg_salary_python, df[~df['title'].str.contains('Python')]['salary'].mean()]
     })
-    sns.barplot(x='类型', y='平均薪资', data=avg_by_type, palette='Set2', ax=axes[1, 0])
+    sns.barplot(x='类型', y='平均薪资', data=avg_by_type, hue='类型', palette='Set2', legend=False, ax=axes[1, 0])
     axes[1, 0].set_title('Python岗位 vs 其他岗位平均薪资对比')
     axes[1, 0].set_ylabel('平均薪资 (元)')
 
     # 图4：各城市薪资箱线图
-    sns.boxplot(x='salary', y='city', data=df, palette='Set3', ax=axes[1, 1])
+    sns.boxplot(x='salary', y='city', data=df, hue='city', palette='Set3', legend=False, ax=axes[1, 1])
     axes[1, 1].set_title('各城市薪资分布箱线图')
     axes[1, 1].set_xlabel('薪资 (元)')
 
@@ -128,11 +133,7 @@ if response.status_code == 200:
     plt.savefig(save_path, dpi=300, bbox_inches='tight')
     print(f"✅ 图表已保存为 {save_path}（高清300dpi）")
 
-    # 尝试显示图片（如果不弹出也没关系，图片已保存）
-    try:
-        plt.show()
-    except Exception:
-        print("⚠️ 图片窗口未弹出，但图片已成功保存到文件夹")
+    plt.close()
 
     print("\n🎉 第二阶段全部完成！")
     print("   • analysis.xlsx 可以直接用 Excel 打开查看数据")
