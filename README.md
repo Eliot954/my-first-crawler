@@ -1,5 +1,4 @@
 # 招聘数据采集与分析工具
-
 为AI招聘/简历分析产品提供数据支持的爬虫与分析项目。
 
 ## 项目背景
@@ -30,9 +29,4 @@
 下一步计划：抓取真实招聘网站数据
 
 ## 预览
-
 ![可视化分析报告](recruitment_analysis.png)
-
-## 链接
-
-- GitHub 仓库：[https://github.com/Eliot954/my-first-crawler](https://github.com/Eliot954/my-first-crawler)
