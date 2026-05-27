@@ -28,3 +28,11 @@
 **技术栈**：Python、requests、pandas、matplotlib、seaborn
 
 下一步计划：抓取真实招聘网站数据
+
+## 预览
+
+![可视化分析报告](recruitment_analysis.png)
+
+## 链接
+
+- GitHub 仓库：[https://github.com/Eliot954/my-first-crawler](https://github.com/Eliot954/my-first-crawler)
