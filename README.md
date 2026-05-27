@@ -29,4 +29,5 @@
 下一步计划：抓取真实招聘网站数据
 
 ## 预览
-![可视化分析报告]()
+<img width="2557" height="1487" alt="1cc4923c64fefd71eade9ce39eec8e64" src="https://github.com/user-attachments/assets/c9cfc16a-7fa3-4fda-b1a2-08bb9e82ed32" />
+
